@@ -21,7 +21,7 @@ const { Content } = await post.render();
 ---
 
 <Layout seo={{ title: post.data.title }}>
-  <article class="prose">
+  <article class="prose dark:prose-invert">
     <Content />
     <PostLike slug={post.slug} />
   </article>
