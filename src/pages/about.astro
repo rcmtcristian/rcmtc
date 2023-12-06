@@ -1,0 +1,26 @@
+---
+import { Image } from "astro:assets";
+import crisPhoto from "../assets/lain.png";
+
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  seo={{ title: "About", description: "Cris is a developer from florida" }}
+>
+  <Image
+    src={crisPhoto}
+    width={312}
+    quality="max"
+    class="rounded-full mx-auto text-center py-4"
+    alt="a photo of cris"
+  />
+  <p class="mx-auto">
+    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto quis quaerat
+    officiis id corrupti voluptas repellat. Autem explicabo, nulla dolores
+    tempore eius sit, error nobis in reprehenderit fuga qui doloribus. Lorem
+    ipsum dolor sit amet consectetur adipisicing elit. Aliquid accusamus hic
+    nisi labore ad nobis. Repudiandae recusandae quod pariatur aspernatur
+    excepturi velit eum fugit enim repellat nihil dolorum, doloremque ea.
+  </p>
+</Layout>

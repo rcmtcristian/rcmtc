@@ -1,0 +1,58 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+
+import PostLike from "../../components/PostLike.astro";
+import Layout from "../../layouts/Layout.astro";
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+
+  return posts.map((post) => ({
+    params: {
+      slug: post.slug,
+    },
+    props: {
+      post,
+    },
+  }));
+}
+
+const post: CollectionEntry<"blog"> = Astro.props.post;
+const { Content } = await post.render();
+---
+
+<Layout seo={{ title: post.data.title }}>
+  <article class="prose">
+    <Content />
+    <PostLike slug={post.slug} />
+  </article>
+</Layout>
+
+<style>
+  .prose {
+    /* max-width: 65ch; */
+    margin: 0 auto;
+    /* color: aliceblue; */
+  }
+
+  * {
+    color: #fff !important;
+  }
+  article {
+    color: #fff;
+  }
+  .prose h1 {
+    color: #fff;
+  }
+
+  h2 {
+    color: #fff;
+  }
+
+  .prose h3 {
+    color: #fff;
+  }
+
+  .prose a {
+    color: #fff;
+  }
+</style>

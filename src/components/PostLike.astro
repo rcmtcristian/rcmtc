@@ -1,0 +1,41 @@
+---
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+---
+
+<div>
+  <button
+    id="like"
+    data-slug={slug}
+    class="px-3 py-1 text-sm text-gray-500 hover:text-gray-600 transition-colors duration-200"
+  >
+    Like
+  </button>
+  <p>Likes: <span id="num-likes"> 0</span></p>
+</div>
+
+<script>
+  const likeButton = document.getElementById("like");
+  const numLikes = document.getElementById("num-likes");
+  const slug = likeButton?.dataset.slug;
+
+  likeButton?.addEventListener("click", hitLike);
+
+  function hitLike() {
+    fetch(`/api/likes/${slug}`, {
+      method: "POST",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (!!numLikes) {
+          numLikes.innerText = data.likes;
+        }
+      })
+      .catch((err) => {
+        alert("could not like the post");
+      });
+  }
+</script>
