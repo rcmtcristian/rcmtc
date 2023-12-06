@@ -1,45 +1,18 @@
-# syntax = docker/dockerfile:1
+FROM node:lts-alpine as runtime
 
-# Adjust NODE_VERSION as desired
-ARG NODE_VERSION=18.15.0
-FROM node:${NODE_VERSION}-slim as base
-
-LABEL fly_launch_runtime="Node.js"
-
-# Node.js app lives here
 WORKDIR /app
 
-# Set production environment
-ENV NODE_ENV="production"
 
+COPY . .
 
-# Throw-away build stage to reduce size of final image
-FROM base as build
-
-# Install packages needed to build node modules
-RUN apt-get update -qq && \
-    apt-get install -y build-essential pkg-config python-is-python3
-
-# Install node modules
-COPY --link package-lock.json package.json ./
-RUN npm ci --include=dev
-
-# Copy application code
-COPY --link . .
-
-# Build application
+RUN npm install
 RUN npm run build
 
-# Remove development dependencies
-RUN npm prune --omit=dev
 
+ENV HOST=0.0.0.0
+ENV PORT=4321
+ENV NODE=production
 
-# Final stage for app image
-FROM base
+EXPOSE 4321
 
-# Copy built application
-COPY --from=build /app /app
-
-# Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
-CMD [ "npm", "run", "start" ]
+CMD npm run start
