@@ -16,7 +16,6 @@ auto_start_machines = true
 min_machines_running = 0
 processes = ["app"]
 
-
-[mount]
+[mounts]
 source = "db"
-detination = "/mnt/db"
+destination = "/mnt/db"
