@@ -8,11 +8,17 @@ import Articles from "../components/Articles.astro";
 <Layout seo={{ title: "Welcome to my blog" }}>
   <main>
     <div class="h-64 flex flex-col justify-center items-start">
-      <h1 class="text-heading-1">Hello, Cris.</h1>
+      <h1 class="text-heading-1">Hello, I'm Cris.</h1>
       <p class="mt-2">
         I'm a Developer Advocate and Software Engineer. I like writing code and
         mentoring.
       </p>
+      <br />
+      <p>
+        I sometimes write about things I'm learning or working on. It's not very
+        often, but I try to make it worth it when I do.
+      </p>
+      <br />
     </div>
     <Articles posts={posts.slice(0, 3)} />
   </main>
