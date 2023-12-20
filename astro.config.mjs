@@ -24,20 +24,30 @@ export default defineConfig({
       lastmod: new Date(),
       priority: 0.85,
       serialize: (item) => {
-        if (item.url.endsWith("/")) {
+        // Remove trailing slashes
+        if (item.url.at(-1) === "/") {
           item.url = item.url.slice(0, -1);
         }
         return item;
       },
       i18n: {
         defaultLocale: "en",
-        locales: ["en", "ja"],
+        // Just an example, we're not actually implementing i18n
+        locales: {
+          en: "en-US",
+          es: "es-ES",
+          fr: "fr-CA",
+        },
       },
     }),
-    ,
   ],
   output: "hybrid",
   adapter: node({
     mode: "standalone",
   }),
+  vite: {
+    optimizeDeps: {
+      exclude: ["@resvg/resvg-js"],
+    },
+  },
 });

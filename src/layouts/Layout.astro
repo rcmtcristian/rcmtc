@@ -3,9 +3,17 @@ import Link from "../components/Link.astro";
 import { SEO, type Props as SEOProps } from "astro-seo";
 interface Props {
   seo?: SEOProps;
+  ogImage?: {
+    template: string;
+    data?: Record<string, any>;
+  };
 }
 
-const { seo } = Astro.props;
+const { seo, ogImage } = Astro.props;
+
+const ogImageUrl = `${Astro.url.origin}/og/${
+  ogImage?.template ?? "default"
+}.png?${new URLSearchParams(ogImage?.data)}`;
 ---
 
 <!doctype html>
@@ -19,7 +27,19 @@ const { seo } = Astro.props;
     <SEO
       {...seo}
       title={seo?.title ?? "Cristian Richards"}
-      description={seo?.description ?? "Cris's blog site"}
+      description={seo?.description ?? "Cris's Blog Site"}
+      openGraph={{
+        basic: {
+          type: "website",
+          title: seo?.title ?? "Cristian Richards Personal Blog",
+          image: ogImageUrl,
+          url: seo?.canonical,
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        image: ogImageUrl,
+      }}
     />
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
