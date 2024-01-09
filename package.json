@@ -35,6 +35,6 @@
     "@types/better-sqlite3": "^7.6.8",
     "@types/markdown-it": "^13.0.6",
     "@types/sanitize-html": "^2.9.4",
-    "drizzle-kit": "^0.20.6"
+    "drizzle-kit": "^0.20.2"
   }
 }
