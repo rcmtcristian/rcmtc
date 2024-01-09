@@ -1,9 +1,9 @@
 ---
-import { type GetStaticPaths, type Page } from "astro";
 import { getCollection, type CollectionEntry } from "astro:content";
+import type { GetStaticPaths, Page } from "astro";
+import Link from "../../components/Link.astro";
 import Layout from "../../layouts/Layout.astro";
 import Articles from "../../components/Articles.astro";
-import Link from "../../components/Link.astro";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const posts = await getCollection("blog");
@@ -35,7 +35,7 @@ const page = Astro.props.page;
       {
         page.url.next && (
           <Link rel="next" href={page.url.next}>
-            Next &gt;&gt;
+            Next / &gt;&gt;
           </Link>
         )
       }
